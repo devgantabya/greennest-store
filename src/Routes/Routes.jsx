@@ -7,6 +7,7 @@ import Login from "../Auth/Login.jsx";
 import Register from "../Auth/Register.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
 import PlantDetails from "../Pages/PlantDetails.jsx";
+import Profile from "../Pages/Profile.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,14 @@ export const router = createBrowserRouter([
       {
         path: "register",
         Component: Register,
+      },
+      {
+        path: "profile",
+        element: (
+          <PrivateRoute>
+            <Profile></Profile>
+          </PrivateRoute>
+        ),
       },
     ],
   },
