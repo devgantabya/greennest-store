@@ -20,7 +20,7 @@
     "rating": 4.7,
     "availableStock": 5,
     "careLevel": "Medium",
-    "description": "A popular decorative plant with large, glossy leaves that brighten any room.",
+    "description": "A stylish indoor plant with large, glossy leaves that add a bold touch to any space. Prefers bright, indirect light and moderate watering, ideal for creating a modern, natural ambiance.",
     "image": "https://i.ibb.co.com/V0y7s8qD/pngtree-detailed-fiddle-leaf-fig-illustration-with-clear-backdrop-png-image-18811605.png",
     "decorImage" : "https://i.ibb.co.com/zWqSCX9Q/Fiddle-Leaf-Fig-decor.jpg",
     "providerName": "Leaf & Co."
@@ -33,7 +33,7 @@
     "rating": 4.7,
     "availableStock": 20,
     "careLevel": "Easy",
-    "description": "A succulent plant known for its healing gel and low maintenance needs.",
+    "description": "Aloe Vera is a hardy succulent plant known for its thick, fleshy leaves filled with soothing gel. It's prized for its natural healing, moisturizing, and air-purifying properties, making it perfect for homes and offices.",
     "image": "https://i.ibb.co.com/6qCkdf4/aloe-vera-plant-in-pot-on-transparent-background-free-png.webp",
     "decorImage" : "https://i.ibb.co.com/HDcxg2FM/Aloe-Vera-decor.webp",
     "providerName": "GreenCare Plants"
@@ -46,7 +46,7 @@
     "rating": 4.6,
     "availableStock": 8,
     "careLevel": "Medium",
-    "description": "Elegant white blooms and air-purifying properties make this a favorite indoor plant.",
+    "description": "Peace Lily is an elegant indoor plant with glossy green leaves and striking white blooms. Known for its air-purifying qualities, it brightens any space while promoting a calm atmosphere.",
     "image": "https://i.ibb.co.com/xdd8LT5/pngtree-peace-lily-spathiphyllum-plant-on-a-black-pot-with-transparent-background-png-image-14886012.png",
     "decorImage" : "https://i.ibb.co.com/bRB8QzvX/Peace-Lily-decor.jpg",
     "providerName": "UrbanGreen Studio"
@@ -59,7 +59,7 @@
     "rating": 4.5,
     "availableStock": 6,
     "careLevel": "Medium",
-    "description": "A tropical plant with iconic split leaves, perfect for modern interiors.",
+    "description": "Monstera Deliciosa is a tropical plant famous for its large, split leaves that add a bold, decorative touch to any space. It thrives in bright, indirect light and brings a lush, vibrant vibe to homes and offices.",
     "image": "https://i.ibb.co.com/VcjPP6FK/pngtree-monstera-deliciosa-monstera-giant-leaf-air-purification-planthouse-isolated-png-file-png-ima.png",
     "decorImage" : "https://i.ibb.co.com/v6Sv5ZgH/Monstera-Deliciosa-decor.jpg",
     "providerName": "Leaf & Co."
@@ -72,7 +72,7 @@
     "rating": 4.5,
     "availableStock": 12,
     "careLevel": "Hard",
-    "description": "A lush fern that helps remove pollutants from the air but requires consistent moisture.",
+    "description": "A lush, feathery plant that adds a refreshing, green touch to any room. Thrives in indirect light and high humidity, perfect for bright, cozy spaces.",
     "image": "https://i.ibb.co.com/1fgYWkNK/pngtree-boston-fern-nephrolepis-exultate-isolated-png-image-11382783.png",
     "decorImage" : "https://i.ibb.co.com/Q7BKB6BN/Boston-Fern-decor.jpg",
     "providerName": "GreenCare Plants"
@@ -85,7 +85,7 @@
     "rating": 4.4,
     "availableStock": 15,
     "careLevel": "Easy",
-    "description": "A resilient succulent believed to bring good luck and prosperity.",
+    "description": "A hardy succulent with thick, glossy leaves that bring a touch of greenery and charm indoors. Requires minimal care and bright, indirect light to thrive.",
     "image": "https://i.ibb.co.com/Hf0YW2t4/pngtree-jade-plant-clipart-png-image-15067960.png",
     "decorImage" : "https://i.ibb.co.com/bgDYn069/houseplants-as-living-decor-jade-plant-window.jpg",
     "providerName": "UrbanGreen Studio"
@@ -98,7 +98,7 @@
     "rating": 4.3,
     "availableStock": 7,
     "careLevel": "Medium",
-    "description": "A striking plant with large, glossy leaves that can grow quite tall indoors.",
+    "description": "A striking indoor plant with large, glossy leaves that add a bold, modern touch to any space. Thrives in bright, indirect light and moderate watering.",
     "image": "https://i.ibb.co.com/LXx7dT96/pngtree-indian-rubber-tree-in-a-white-pot-transparency-background-png-image-13360542.png",
     "decorImage" : "https://i.ibb.co.com/WW1VffLZ/Rubber-Plant-decor.jpg",
     "providerName": "Leaf & Co."
@@ -111,7 +111,7 @@
     "rating": 4.3,
     "availableStock": 10,
     "careLevel": "Medium",
-    "description": "A fragrant herb that promotes relaxation and can be used in cooking.",
+    "description": "A fragrant herb with delicate purple blooms that brighten spaces and soothe the senses. Prefers full sun and well-drained soil for healthy growth.",
     "image": "https://i.ibb.co.com/VpDD4ZTZ/pngtree-lavender-botanical-drawing-png-image-16692184.png",
     "decorImage" : "https://i.ibb.co.com/8LcBhd7h/Lavender-decor.jpg",
     "providerName": "GreenCare Plants"
@@ -124,7 +124,7 @@
     "rating": 4.3,
     "availableStock": 9,
     "careLevel": "Easy",
-    "description": "An almost indestructible indoor plant that thrives in low light and minimal water.",
+    "description": "A low-maintenance indoor plant with glossy, dark green leaves that thrive in low to bright indirect light. Perfect for adding greenery to any space with minimal care.",
     "image": "https://i.ibb.co.com/dwjrjmFP/pngtree-healthy-green-zz-plant-in-a-white-pot-on-neutral-background-png-image-16683346.webp",
     "decorImage" : "https://i.ibb.co.com/8LdnhGbk/ZZ-Plant-decor.jpg",
     "providerName": "UrbanGreen Studio"

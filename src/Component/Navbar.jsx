@@ -1,14 +1,12 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import { Link, NavLink, useNavigate } from "react-router";
-import { auth } from "../firebase/firebase.config";
-import { signOut } from "firebase/auth";
 import logo from "../assets/logo.png";
 import { AuthContext } from "../contexts/AuthContext/AuthContext";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const { user, setUser } = useContext(AuthContext);
+  const { user, signOutUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const menuRef = useRef();
   const dropdownRef = useRef();
@@ -18,20 +16,17 @@ const Navbar = () => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         setMenuOpen(false);
       }
-
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setDropdownOpen(false);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const handleLogout = async () => {
     try {
-      await signOut(auth);
-      setUser(null);
+      await signOutUser();
       navigate("/login");
     } catch (error) {
       console.error(error.message);
@@ -57,7 +52,6 @@ const Navbar = () => {
           Plants
         </NavLink>
       </li>
-
       {user && (
         <li onClick={() => setMenuOpen(false)}>
           <NavLink to="/profile" className={navLinkClass}>
@@ -70,7 +64,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white relative shadow-sm">
-      <div className="flex justify-between items-center py-6 pr-4 md:pr-0 container mx-auto relative z-50">
+      <div className="flex justify-between items-center py-2 pr-4 md:pr-0 container mx-auto relative z-50">
         <div className="flex items-center gap-4">
           <button
             className="lg:hidden btn bg-white border-0 shadow-none hover:bg-white"
@@ -131,7 +125,7 @@ const Navbar = () => {
                         handleLogout();
                         setDropdownOpen(false);
                       }}
-                      className="text-red-600 w-full text-left hover:bg-red-50 rounded-lg"
+                      className="text-red-600 w-full text-base text-left hover:bg-red-50 rounded-lg"
                     >
                       Logout
                     </button>
@@ -157,6 +151,7 @@ const Navbar = () => {
           )}
         </div>
       </div>
+
       {menuOpen && (
         <ul
           ref={menuRef}

@@ -64,7 +64,7 @@ const PlantDetails = () => {
     <div className="container mx-auto my-10 md:my-12 px-4 md:px-0">
       <title>{`GreenNest - ${plant.plantName}`}</title>
 
-      <section className="flex flex-col md:flex-row gap-10 bg-white md:pt-8 pb-8">
+      <section className="flex flex-col md:flex-row gap-8 md:gap-10 bg-white md:pt-8 pb-8">
         <div className="w-full md:w-1/2 relative">
           <img
             src={plant.image}
@@ -104,7 +104,7 @@ const PlantDetails = () => {
               {plant.availableStock}
             </p>
 
-            <p className="text-gray-600 leading-relaxed mb-5 md:mb-1">
+            <p className="text-gray-600 leading-relaxed mb-5">
               {plant.description}
             </p>
           </div>
@@ -151,8 +151,8 @@ const PlantDetails = () => {
         </div>
       </section>
 
-      <section className="border-t border-gray-400 pt-5">
-        <h1 className="text-2xl md:text-5xl font-bold text-gray-900 mb-4 md:mb-8 tracking-tight">
+      <section className="border-t border-gray-400">
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-5 md:mt-10 tracking-tight">
           Decor Idea
         </h1>
         <img
