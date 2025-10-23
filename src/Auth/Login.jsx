@@ -1,41 +1,64 @@
-import React, { use } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../contexts/AuthContext/AuthContext";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { auth } from "../firebase/firebase.config";
+import { FaRegEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
-  const { signInUser, signInWithGoogle } = use(AuthContext);
-
+  const { signInUser, signInWithGoogle } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
   const handleLogIn = (event) => {
     event.preventDefault();
-    const email = event.target.email.value;
-    const password = event.target.password.value;
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
 
     signInUser(email, password)
-      .then((result) => {
-        event.target.reset();
+      .then(() => {
+        form.reset();
         navigate(location.state || "/");
       })
-      .catch((error) => console.log(error));
+
+      .catch((error) => {
+        console.error("Login error:", error.code, error.message);
+        setMessage(error.message);
+      });
+  };
+
+  const handleForgotPassword = async () => {
+    if (!email) {
+      setMessage("⚠️ Please enter your email first.");
+      return;
+    }
+
+    try {
+      await sendPasswordResetEmail(auth, email);
+      setMessage(`✅ Password reset link sent to ${email}`);
+      window.open("https://mail.google.com", "_blank");
+    } catch (error) {
+      setMessage(`❌ ${error.message}`);
+    }
   };
 
   const handleGoogleSignIn = () => {
     signInWithGoogle()
-      .then((result) => {
-        navigate(location?.state || "/");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      .then(() => navigate(location?.state || "/"))
+      .catch((error) => setMessage(error.message));
   };
 
   return (
-    <div className="hero bg-base-200 min-h-screen">
+    <div className="bg-base-200 py-10 md:min-h-screen">
+      <title>GreenNest - Login</title>
       <div className="hero-content flex-col">
-        <div className="text-center lg:text-left">
-          <h1 className="text-5xl font-bold mb-4">Welcome back!</h1>
+        <div className="text-center">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">Welcome back!</h1>
         </div>
 
         <div className="card bg-base-100 w-full md:w-[320px] shrink-0 shadow-2xl">
@@ -47,33 +70,62 @@ const Login = () => {
                   name="email"
                   className="input"
                   placeholder="Email"
-                />
-                <input
-                  type="password"
-                  name="password"
-                  className="input"
-                  placeholder="Password"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
 
-                <div className="text-right -mt-2">
-                  <NavLink
-                    to="/forgot-password"
-                    className="text-sm text-teal-500 hover:underline"
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    className="input w-full pr-12"
+                    placeholder="Password"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-3 text-gray-500 text-sm"
                   >
-                    Forgot password?
-                  </NavLink>
+                    {showPassword ? (
+                      <span>
+                        <FaEyeSlash />
+                      </span>
+                    ) : (
+                      <span>
+                        <FaRegEye />
+                      </span>
+                    )}
+                  </button>
                 </div>
 
-                <button className="btn btn-neutral w-full">Sign In</button>
+                <div className="text-right -mt-2">
+                  <button
+                    type="button"
+                    onClick={handleForgotPassword}
+                    className="text-sm text-green-500 hover:underline"
+                  >
+                    Forgot password?
+                  </button>
+                </div>
+
+                <button className="btn btn-neutral bg-green-600 hover:bg-green-700 text-lg font-semibold border-0 w-full">
+                  Sign In
+                </button>
               </fieldset>
             </form>
+
+            {message && (
+              <p className="text-center text-sm mt-3 text-green-600">
+                {message}
+              </p>
+            )}
 
             <div className="text-center mt-3 text-sm">
               <p>
                 Don't have an account?{" "}
                 <NavLink
                   to="/register"
-                  className="text-teal-500 font-medium hover:underline"
+                  className="text-green-500 font-medium hover:underline"
                 >
                   Sign Up
                 </NavLink>

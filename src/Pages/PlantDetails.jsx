@@ -1,7 +1,8 @@
 import React, { use, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import { AuthContext } from "../contexts/AuthContext/AuthContext";
 import { toast } from "react-toastify";
+import errorPlant from "../assets/404 plant.jpg";
 
 const PlantDetails = () => {
   const { id } = useParams();
@@ -37,10 +38,28 @@ const PlantDetails = () => {
   };
 
   if (loading) return <p className="text-center mt-10">Loading...</p>;
-  if (!plant) return <p className="text-center mt-10">Plant not found</p>;
+  if (!plant)
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <title>GreenNest - Plant Not found</title>
+        <div className="text-center">
+          <img className="w-auto h-90 mx-auto" src={errorPlant} alt="" />
+          <h1 className="text-[#001931] font-semibold text-5xl leading-15 ">
+            Opps! Plant not found!
+          </h1>
+          <Link
+            to="/plants"
+            className="bg-green-500 py-2 px-4 text-white rounded text-base font-semibold"
+          >
+            <button className="mt-8">Go Back!</button>
+          </Link>
+        </div>
+      </div>
+    );
 
   return (
     <div className="max-w-4xl mx-auto my-10 p-6 bg-white shadow-lg rounded-xl">
+      <title>{`GreenNest - ${plant.plantName}`}</title>
       <div className="flex flex-col md:flex-row gap-8">
         <img
           src={plant.image}

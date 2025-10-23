@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { AuthContext } from "./../contexts/AuthContext/AuthContext";
+import { FaRegEye, FaEyeSlash } from "react-icons/fa";
 
 const Register = () => {
   const { createUser, signInWithGoogle } = useContext(AuthContext);
@@ -11,6 +12,7 @@ const Register = () => {
     email: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     setInputValue({ ...inputValue, [e.target.name]: e.target.value });
@@ -23,22 +25,25 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         console.log(result.user);
-        navigate("/"); // redirect after signup
+        navigate("/");
       })
       .catch((error) => console.error(error));
   };
 
   const handleGoogleSignIn = () => {
     signInWithGoogle()
-      .then((user) => navigate("/")) // redirect after signup/login
+      .then((user) => navigate("/"))
       .catch((err) => console.error(err));
   };
 
   return (
-    <div className="hero bg-base-200 min-h-screen">
+    <div className="bg-base-200 py-10 md:min-h-screen">
+      <title>GreenNest - Register</title>
       <div className="hero-content flex-col">
         <div className="text-center lg:text-left">
-          <h1 className="text-5xl font-bold">Please Register!</h1>
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">
+            Please Register!
+          </h1>
         </div>
 
         <div className="card bg-base-100 w-full md:w-[300px] shrink-0 shadow-2xl">
@@ -63,16 +68,35 @@ const Register = () => {
                   placeholder="Email"
                   required
                 />
-                <input
-                  type="password"
-                  name="password"
-                  value={inputValue.password}
-                  onChange={handleChange}
-                  className="input"
-                  placeholder="Password"
-                  required
-                />
-                <button className="btn btn-neutral w-full mt-4">Sign Up</button>
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    value={inputValue.password}
+                    onChange={handleChange}
+                    className="input w-full pr-12"
+                    placeholder="Password"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-3 text-gray-500 text-sm"
+                  >
+                    {showPassword ? (
+                      <span>
+                        <FaEyeSlash />
+                      </span>
+                    ) : (
+                      <span>
+                        <FaRegEye />
+                      </span>
+                    )}
+                  </button>
+                </div>
+                <button className="btn btn-neutral bg-green-600 hover:bg-green-700 text-lg font-semibold border-0 w-full">
+                  Sign Up
+                </button>
               </fieldset>
             </form>
 
@@ -81,7 +105,7 @@ const Register = () => {
                 Already have an account?{" "}
                 <NavLink
                   to="/login"
-                  className="text-teal-500 font-medium hover:underline"
+                  className="text-green-500 font-medium hover:underline"
                 >
                   Log In
                 </NavLink>
@@ -94,7 +118,6 @@ const Register = () => {
               onClick={handleGoogleSignIn}
               className="btn w-full bg-white text-black border-[#e5e5e5] hover:bg-gray-100 flex items-center justify-center gap-2"
             >
-              {/* Google Icon */}
               <svg
                 aria-label="Google logo"
                 width="18"

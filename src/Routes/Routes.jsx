@@ -8,11 +8,13 @@ import Register from "../Auth/Register.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
 import PlantDetails from "../Pages/PlantDetails.jsx";
 import Profile from "../Pages/Profile.jsx";
+import NotFoundPage from "../Pages/NotFoundPage.jsx";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: Root,
+    errorElement: <NotFoundPage></NotFoundPage>,
     children: [
       {
         index: true,

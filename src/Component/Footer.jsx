@@ -36,7 +36,7 @@ const Footer = () => {
       <div className="border-t border-gray-600 py-5">
         <div className="container mx-auto">
           <p className="text-center text-mute">
-            © 2025 GreenNest. All rights reserved.
+            © {new Date().getFullYear()} GreenNest. All rights reserved.
           </p>
         </div>
       </div>

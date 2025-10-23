@@ -1,71 +1,118 @@
-import React, { use, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../contexts/AuthContext/AuthContext";
 import { updateProfile } from "firebase/auth";
+import { storage } from "../firebase/firebase.config";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { FaUpload } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Profile = () => {
-  const { user } = use(AuthContext);
+  const { user } = useContext(AuthContext);
   const [name, setName] = useState(user?.displayName || "");
-  const [photo, setPhoto] = useState(user?.photoURL || "");
-  const [message, setMessage] = useState("");
+  const [preview, setPreview] = useState(user?.photoURL || null);
+  const [file, setFile] = useState(null);
+  const [updating, setUpdating] = useState(false);
 
-  const handleUpdateProfile = async () => {
-    if (!user) return;
+  useEffect(() => {
+    return () => {
+      if (preview) URL.revokeObjectURL(preview);
+    };
+  }, [preview]);
 
-    try {
-      await updateProfile(user, {
-        displayName: name,
-        photoURL: photo,
-      });
-      setMessage("Profile updated successfully!");
-      user.displayName = name;
-      user.photoURL = photo;
-    } catch (error) {
-      setMessage(error.message);
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      if (selectedFile.size > 5 * 1024 * 1024) {
+        toast.error("File too large. Please upload an image under 5MB.");
+        return;
+      }
+      setFile(selectedFile);
+      setPreview(URL.createObjectURL(selectedFile));
+      toast.info("Image selected. Don’t forget to click Update Profile!");
     }
   };
-  return (
-    <div className="max-w-md mx-auto bg-white shadow-lg rounded-2xl p-6 mt-10">
-      <h2 className="text-2xl font-bold text-center mb-6">My Profile</h2>
 
-      <div className="flex flex-col items-center">
+  const handleUpdate = async () => {
+    if (!user) return;
+    setUpdating(true);
+
+    try {
+      let finalPhotoURL = user.photoURL;
+
+      if (file) {
+        const storageRef = ref(
+          storage,
+          `profilePhotos/${user.uid}/profile.jpg`
+        );
+        await uploadBytes(storageRef, file);
+        finalPhotoURL = await getDownloadURL(storageRef);
+      }
+
+      await updateProfile(user, {
+        displayName: name,
+        photoURL: finalPhotoURL,
+      });
+
+      toast.success("✅ Profile updated successfully!");
+    } catch (error) {
+      toast.error("❌ Error updating profile: " + error.message);
+    } finally {
+      setUpdating(false);
+    }
+  };
+
+  return (
+    <div className="max-w-md mx-auto p-6 bg-white shadow-md rounded-md mt-10 text-center">
+      <title>GreenNest - Profile</title>
+      <h1 className="text-2xl font-bold mb-6">My Profile</h1>
+
+      <div className="relative inline-block mb-3">
         <img
-          src={photo || "https://via.placeholder.com/100"}
-          alt="User"
-          className="w-24 h-24 rounded-full border-2 border-gray-300 mb-4"
+          src={preview || "https://i.ibb.co.com/fGMNLM9Z/Sample-User-Icon.png"}
+          alt="Profile"
+          className="w-40 h-40 object-cover rounded-lg mx-auto border"
         />
 
-        <p className="text-lg font-semibold">
-          {user?.displayName || "No name set"}
-        </p>
-        <p className="text-gray-600 mb-4">{user?.email}</p>
-
-        <div className="w-full space-y-3">
+        <label className="absolute bottom-2 right-2 bg-green-500 text-white p-2 rounded-full cursor-pointer hover:bg-green-600">
+          <FaUpload />
           <input
-            type="text"
-            placeholder="Update Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full border rounded-lg p-2"
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+            className="hidden"
           />
-
-          <input
-            type="text"
-            placeholder="Update Photo URL"
-            value={photo}
-            onChange={(e) => setPhoto(e.target.value)}
-            className="w-full border rounded-lg p-2"
-          />
-
-          <button
-            onClick={handleUpdateProfile}
-            className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition"
-          >
-            Update Profile
-          </button>
-        </div>
-
-        {message && <p className="mt-4 text-green-600">{message}</p>}
+        </label>
       </div>
+
+      <div className="mb-4 text-left">
+        <label className="block font-semibold mb-1">Name:</label>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="w-full border p-2 rounded"
+        />
+      </div>
+
+      <div className="mb-6 text-left">
+        <label className="block font-semibold mb-1">Email:</label>
+        <p className="w-full border p-2 rounded bg-gray-100 text-gray-700 text-sm">
+          {user?.email}
+        </p>
+      </div>
+
+      <button
+        onClick={handleUpdate}
+        disabled={updating}
+        className={`bg-green-500 text-white px-5 py-2 rounded hover:bg-green-600 transition ${
+          updating ? "opacity-70 cursor-not-allowed" : ""
+        }`}
+      >
+        {updating ? "Updating..." : "Update Profile"}
+      </button>
+
+      <ToastContainer position="top-center" autoClose={2000} />
     </div>
   );
 };

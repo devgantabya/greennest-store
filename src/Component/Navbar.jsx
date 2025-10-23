@@ -1,4 +1,3 @@
-// Navbar.jsx
 import React, { useState, useContext, useEffect, useRef } from "react";
 import { Link, NavLink, useNavigate } from "react-router";
 import { auth } from "../firebase/firebase.config";
@@ -8,17 +7,23 @@ import { AuthContext } from "../contexts/AuthContext/AuthContext";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const { user, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const menuRef = useRef();
+  const dropdownRef = useRef();
 
-  // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         setMenuOpen(false);
       }
+
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
@@ -52,13 +57,20 @@ const Navbar = () => {
           Plants
         </NavLink>
       </li>
+
+      {user && (
+        <li onClick={() => setMenuOpen(false)}>
+          <NavLink to="/profile" className={navLinkClass}>
+            My Profile
+          </NavLink>
+        </li>
+      )}
     </>
   );
 
   return (
     <nav className="bg-white relative shadow-sm">
-      <div className="flex justify-between items-center py-6 container mx-auto relative z-50">
-        {/* Logo + Mobile Menu Button */}
+      <div className="flex justify-between items-center py-6 pr-4 md:pr-0 container mx-auto relative z-50">
         <div className="flex items-center gap-4">
           <button
             className="lg:hidden btn bg-white border-0 shadow-none hover:bg-white"
@@ -86,42 +98,46 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Desktop Menu */}
         <div className="hidden lg:flex items-center">
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
 
-        {/* User Section */}
         <div className="flex items-center gap-4">
           {user ? (
-            <div className="dropdown dropdown-end" ref={menuRef}>
-              <div tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                <div className="w-10 rounded-full">
+            <div className="dropdown dropdown-end relative" ref={dropdownRef}>
+              <button
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="w-10 rounded-full bg-green-100 border border-green-400 overflow-hidden">
                   <img
-                    src={user.photoURL || "/default-avatar.png"}
+                    src={
+                      user.photoURL ||
+                      "https://i.ibb.co.com/fGMNLM9Z/Sample-User-Icon.png"
+                    }
                     alt={user.displayName || "User"}
                   />
                 </div>
-              </div>
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow"
-              >
-                <li className="font-semibold text-gray-700 px-3 py-2 border-b">
-                  {user.displayName || "User"}
-                </li>
-                <li>
-                  <Link to="/profile">My Profile</Link>
-                </li>
-                <li>
-                  <button
-                    onClick={handleLogout}
-                    className="text-red-600 w-full text-left hover:bg-red-50 rounded-lg"
-                  >
-                    Logout
-                  </button>
-                </li>
-              </ul>
+              </button>
+
+              {dropdownOpen && (
+                <ul className="menu menu-sm dropdown-content bg-base-100 rounded-box absolute right-0 mt-3 w-52 p-2 shadow z-50">
+                  <li className="font-semibold text-gray-700 px-3 py-2 border-b">
+                    {user.displayName || "User"}
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => {
+                        handleLogout();
+                        setDropdownOpen(false);
+                      }}
+                      className="text-red-600 w-full text-left hover:bg-red-50 rounded-lg"
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </ul>
+              )}
             </div>
           ) : (
             <div className="flex items-center gap-3">
@@ -141,8 +157,6 @@ const Navbar = () => {
           )}
         </div>
       </div>
-
-      {/* Mobile Menu */}
       {menuOpen && (
         <ul
           ref={menuRef}
