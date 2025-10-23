@@ -63,9 +63,9 @@ const Profile = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white shadow-md rounded-md mt-10 text-center">
+    <div className="max-w-md mx-auto p-6 bg-white md:shadow-md rounded-md pt-8 mb-8 md:mt-10 text-center">
       <title>GreenNest - Profile</title>
-      <h1 className="text-2xl font-bold mb-6">My Profile</h1>
+      <h1 className="text-3xl font-bold mb-6">My Profile</h1>
 
       <div className="relative inline-block mb-3">
         <img

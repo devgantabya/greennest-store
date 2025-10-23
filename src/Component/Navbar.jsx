@@ -39,7 +39,7 @@ const Navbar = () => {
   };
 
   const navLinkClass = ({ isActive }) =>
-    `text-base font-medium hover:text-[#209d50] transition ${
+    `text-base font-medium hover:text-[#209d50] hover:bg-transparent transition ${
       isActive
         ? "text-[#209d50] relative after:absolute after:left-0 after:-bottom-0 after:w-full after:h-[2px] after:bg-[#209d50]"
         : "text-black"
