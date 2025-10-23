@@ -1,12 +1,13 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import { AuthContext } from "../contexts/AuthContext/AuthContext";
 import { toast } from "react-toastify";
 import errorPlant from "../assets/404 plant.jpg";
+import { FaStar } from "react-icons/fa";
 
 const PlantDetails = () => {
   const { id } = useParams();
-  const { user } = use(AuthContext);
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [plant, setPlant] = useState(null);
@@ -28,6 +29,7 @@ const PlantDetails = () => {
         setLoading(false);
       });
   }, [id]);
+
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -38,72 +40,127 @@ const PlantDetails = () => {
   };
 
   if (loading) return <p className="text-center mt-10">Loading...</p>;
+
   if (!plant)
     return (
       <div className="flex justify-center items-center h-screen">
-        <title>GreenNest - Plant Not found</title>
+        <title>GreenNest - Plant Not Found</title>
         <div className="text-center">
-          <img className="w-auto h-90 mx-auto" src={errorPlant} alt="" />
-          <h1 className="text-[#001931] font-semibold text-5xl leading-15 ">
-            Opps! Plant not found!
+          <img className="w-80 mx-auto mb-6" src={errorPlant} alt="" />
+          <h1 className="text-[#001931] font-semibold text-4xl mb-4">
+            Oops! Plant not found.
           </h1>
           <Link
             to="/plants"
-            className="bg-green-500 py-2 px-4 text-white rounded text-base font-semibold"
+            className="inline-block bg-green-600 hover:bg-green-700 text-white py-2 px-6 rounded-lg font-semibold transition"
           >
-            <button className="mt-8">Go Back!</button>
+            Go Back
           </Link>
         </div>
       </div>
     );
 
   return (
-    <div className="max-w-4xl mx-auto my-10 p-6 bg-white shadow-lg rounded-xl">
+    <div className="container mx-auto my-10 md:my-12 px-4 md:px-0">
       <title>{`GreenNest - ${plant.plantName}`}</title>
-      <div className="flex flex-col md:flex-row gap-8">
-        <img
-          src={plant.image}
-          alt={plant.plantName}
-          className="w-full md:w-1/2 rounded-xl object-cover"
-        />
-        <div>
-          <h2 className="text-3xl font-bold mb-2">{plant.plantName}</h2>
-          <p className="text-gray-600 mb-3">{plant.description}</p>
-          <p className="text-lg font-semibold">💲Price: ${plant.price}</p>
-          <p className="text-lg">⭐ Rating: {plant.rating}</p>
-          <p className="text-lg">📦 Stock: {plant.availableStock}</p>
-        </div>
-      </div>
 
-      <div className="mt-10 border-t pt-6">
-        <h3 className="text-2xl font-semibold mb-4">Book Consultation</h3>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="text"
-            name="name"
-            value={form.name}
-            onChange={handleChange}
-            placeholder="Your Name"
-            className="w-full p-3 border rounded-md focus:outline-green-500"
-            required
+      <section className="flex flex-col md:flex-row gap-10 bg-white md:pt-8 pb-8">
+        <div className="w-full md:w-1/2 relative">
+          <img
+            src={plant.image}
+            alt={plant.plantName}
+            className="w-full h-auto rounded-xl object-cover bg-gray-100 p-4"
           />
-          <input
-            type="email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            placeholder="Your Email"
-            className="w-full p-3 border rounded-md focus:outline-green-500"
-            required
-          />
-          <button
-            type="submit"
-            className="bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition"
-          >
-            Book Now
-          </button>
-        </form>
-      </div>
+          <div className="absolute top-4 left-4 bg-green-100 text-green-800 text-sm font-semibold px-3 py-1 rounded-full">
+            {plant.category}
+          </div>
+        </div>
+
+        <div className="w-full md:w-1/2 flex flex-col justify-between">
+          <div>
+            <h1 className="text-4xl font-bold text-gray-800 mb-2">
+              {plant.plantName}
+            </h1>
+            <p className="text-gray-500 italic text-sm mb-4">
+              by {plant.providerName}
+            </p>
+
+            <p className="text-3xl font-bold text-[#209d50] mb-4">
+              ${plant.price}
+            </p>
+
+            <div className="flex items-center gap-6 text-gray-700 mb-4">
+              <p>
+                <span className="font-semibold">Care Level:</span>{" "}
+                {plant.careLevel}
+              </p>
+              <p className="flex items-center gap-1 font-semibold text-yellow-500">
+                <FaStar /> {plant.rating}
+              </p>
+            </div>
+
+            <p className="text-gray-700 mb-2">
+              <span className="font-semibold">Available Stock:</span>{" "}
+              {plant.availableStock}
+            </p>
+
+            <p className="text-gray-600 leading-relaxed mb-5 md:mb-1">
+              {plant.description}
+            </p>
+          </div>
+
+          <div className="border-t border-gray-300 pt-6">
+            <h3 className="text-2xl font-semibold mb-5 text-gray-800">
+              Book a Consultation
+            </h3>
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div>
+                <input
+                  type="text"
+                  name="name"
+                  value={form.name}
+                  onChange={handleChange}
+                  id="name"
+                  placeholder="Your Name"
+                  className="w-full border border-gray-300 rounded-lg  px-4 py-3  text-gray-900 placeholder-gray-400  focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition"
+                  required
+                />
+              </div>
+
+              <div>
+                <input
+                  type="email"
+                  name="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  id="email"
+                  placeholder="Your Email"
+                  className="w-full border border-gray-300 rounded-lg  px-4 py-3  text-gray-900 placeholder-gray-400  focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition"
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full bg-[#209d50] hover:bg-[#127538] text-white text-lg py-3 rounded-lg transition font-bold"
+              >
+                Book Now
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-gray-400 pt-5">
+        <h1 className="text-2xl md:text-5xl font-bold text-gray-900 mb-4 md:mb-8 tracking-tight">
+          Decor Idea
+        </h1>
+        <img
+          src={plant.decorImage}
+          alt={plant.plantName}
+          className="w-full h-auto rounded-xl object-cover"
+        />
+      </section>
     </div>
   );
 };
