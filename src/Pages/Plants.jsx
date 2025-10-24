@@ -4,13 +4,26 @@ import { Link } from "react-router";
 
 const Plants = () => {
   const [plants, setPlants] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch("/plants.json")
       .then((res) => res.json())
-      .then((data) => setPlants(data))
+      .then((data) => {
+        setTimeout(() => {
+          setPlants(data);
+          setLoading(false);
+        }, 500);
+      })
       .catch((err) => console.error(err));
   }, []);
+
+  if (loading)
+    return (
+      <div className="text-center mt-20 h-screen flex justify-center items-center">
+        <span className="loading loading-spinner loading-xl text-success"></span>
+      </div>
+    );
 
   return (
     <div className="container mx-auto px-4 pb-8 pt-0 md:pt-8">

@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import errorPageImg from "../assets/404.jpg";
 import { Link } from "react-router";
 import Navbar from "../Component/Navbar";
 import Footer from "../Component/Footer";
 
 const ErrorPage = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading)
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <span className="loading loading-spinner loading-xl text-success"></span>
+      </div>
+    );
+
   return (
     <div className="bg-white">
       <title>GreenNest - 404</title>

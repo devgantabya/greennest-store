@@ -24,9 +24,11 @@ const PlantDetails = () => {
     fetch("/plants.json")
       .then((res) => res.json())
       .then((data) => {
-        const matchingData = data.find((p) => p.plantId === parseInt(id));
-        setPlant(matchingData);
-        setLoading(false);
+        setTimeout(() => {
+          const matchingData = data.find((p) => p.plantId === parseInt(id));
+          setPlant(matchingData);
+          setLoading(false);
+        }, 500);
       });
   }, [id]);
 
@@ -39,7 +41,12 @@ const PlantDetails = () => {
     setForm({ name: "", email: "" });
   };
 
-  if (loading) return <p className="text-center mt-10">Loading...</p>;
+  if (loading)
+    return (
+      <div className="text-center mt-20 h-screen flex justify-center items-center">
+        <span className="loading loading-spinner loading-xl text-success"></span>
+      </div>
+    );
 
   if (!plant)
     return (

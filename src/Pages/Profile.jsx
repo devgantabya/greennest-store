@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../contexts/AuthContext/AuthContext";
 import { updateProfile } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
@@ -9,6 +9,22 @@ const Profile = () => {
   const [name, setName] = useState(user?.displayName || "");
   const [photoURL, setPhotoURL] = useState(user?.photoURL || "");
   const [updating, setUpdating] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading)
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <span className="loading loading-spinner loading-xl text-success"></span>
+      </div>
+    );
 
   const handleUpdate = async () => {
     if (!user) return;

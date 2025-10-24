@@ -13,8 +13,10 @@ const Home = () => {
     fetch("/plants.json")
       .then((res) => res.json())
       .then((data) => {
-        setPlants(data);
-        setLoading(false);
+        setTimeout(() => {
+          setPlants(data);
+          setLoading(false);
+        }, 500);
       })
       .catch((err) => {
         console.error("Failed to fetch plants.json", err);
@@ -22,7 +24,12 @@ const Home = () => {
       });
   }, []);
 
-  if (loading) return <div className="text-center mt-20">Loading...</div>;
+  if (loading)
+    return (
+      <div className="text-center mt-20 h-screen flex justify-center items-center">
+        <span className="loading loading-spinner loading-xl text-success"></span>
+      </div>
+    );
 
   const experts = plants.filter(
     (plant, index, self) =>
