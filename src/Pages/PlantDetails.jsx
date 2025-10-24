@@ -72,11 +72,11 @@ const PlantDetails = () => {
       <title>{`GreenNest - ${plant.plantName}`}</title>
 
       <section className="flex flex-col md:flex-row gap-8 md:gap-10 bg-white md:pt-8 pb-8">
-        <div className="w-full md:w-1/2 relative">
+        <div className="w-full md:w-1/2 relative bg-gray-100 rounded-xl">
           <img
             src={plant.image}
             alt={plant.plantName}
-            className="w-full h-auto rounded-xl object-cover bg-gray-100 p-4"
+            className="w-full h-auto rounded-xl object-cover  p-4"
           />
           <div className="absolute top-4 left-4 bg-green-100 text-green-800 text-sm font-semibold px-3 py-1 rounded-full">
             {plant.category}

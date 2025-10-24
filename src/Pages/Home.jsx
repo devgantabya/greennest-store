@@ -111,28 +111,44 @@ const Home = () => {
       <section className="px-4 md:px-10 bg-green-50 py-8 md:py-16 rounded-lg">
         <h2 className="text-4xl font-bold mb-6">Plant Care Tips</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {plants.slice(0, 3).map((plant) => (
-            <div key={plant.plantId} className="p-6 bg-white rounded-lg shadow">
-              <h3 className="text-xl font-semibold mb-2">{plant.plantName}</h3>
-              <p>Care Level: {plant.careLevel}</p>
-              <p>{plant.description}</p>
-            </div>
-          ))}
+          <div className="p-6 bg-white rounded-lg shadow">
+            <h3 className="text-xl font-semibold mb-2">Water Wisely</h3>
+            <p>
+              Check the soil before watering; most plants prefer their soil to
+              dry slightly between waterings. Avoid overwatering to prevent root
+              rot.
+            </p>
+          </div>
+          <div className="p-6 bg-white rounded-lg shadow">
+            <h3 className="text-xl font-semibold mb-2">Give Proper Light</h3>
+            <p>
+              Place your plants according to their light needs: bright sunlight
+              for sun-loving plants, indirect light for low-light species.
+              Rotate them occasionally for even growth.
+            </p>
+          </div>
+          <div className="p-6 bg-white rounded-lg shadow">
+            <h3 className="text-xl font-semibold mb-2">Prune and Clean</h3>
+            <p>
+              Remove dead or yellowing leaves and wipe dust off foliage. This
+              keeps plants healthy and helps them grow stronger.
+            </p>
+          </div>
         </div>
       </section>
 
       <section className="px-4 md:px-10">
-        <h2 className="text-4xl font-bold mb-6">Meet Our Green Experts</h2>
+        <h2 className="text-4xl font-bold mb-12">Meet Our Green Experts</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {experts.map((expert, index) => (
             <div key={index} className="text-center">
               <img
-                src={expert.image}
-                alt={expert.providerName}
-                className="w-80 h-80 md:w-40 md:h-40 mx-auto rounded-full object-contain"
+                src={expert.expertImage}
+                alt={expert.expertName}
+                className="w-90 h-90 md:w-60 md:h-60 mx-auto rounded-lg object-contain"
               />
               <h3 className="mt-4 text-2xl md:text-xl font-semibold">
-                {expert.providerName}
+                {expert.expertName}
               </h3>
               <p className="text-[#209d50] text-xl font-medium md:text-base">
                 Plant Specialist
