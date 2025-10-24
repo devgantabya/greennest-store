@@ -4,6 +4,7 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import { FaStar } from "react-icons/fa";
 import { Link } from "react-router";
+import PlantOfWeek from "../Component/Section/PlantOfWeek";
 
 const Home = () => {
   const [plants, setPlants] = useState([]);
@@ -115,8 +116,8 @@ const Home = () => {
             <h3 className="text-xl font-semibold mb-2">Water Wisely</h3>
             <p>
               Check the soil before watering; most plants prefer their soil to
-              dry slightly between waterings. Avoid overwatering to prevent root
-              rot.
+              dry slightly between waterings. Avoid over watering to prevent
+              root rot.
             </p>
           </div>
           <div className="p-6 bg-white rounded-lg shadow">
@@ -187,6 +188,10 @@ const Home = () => {
             </div>
           ))}
         </div>
+      </section>
+
+      <section className=" px-4 md:px-10 pb-10 md:pb-16 pt-2 md:pt-5 rounded-lg ">
+        <PlantOfWeek></PlantOfWeek>
       </section>
     </div>
   );
