@@ -1,2 +1,72 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease-out;
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.swiper-pagination {
+  bottom: 20px !important;
+}
+
+.swiper-pagination-bullet {
+  width: 10px !important;
+  height: 10px !important;
+  background-color: rgb(233, 233, 233) !important;
+  opacity: 1;
+  margin: 0 6px !important;
+}
+
+.swiper-pagination-bullet-active {
+background-color: rgb(255, 255, 255) !important;
+  width: 12px !important; 
+  height: 12px !important;
+}
+
+.swiper-pagination-bullet:hover {
+  width: 12px !important; 
+  height: 12px !important;
+  transform: scale(1.2);
+  transition: transform 0.3s;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    height: 35px !important;
+    width: 35px !important;
+    border-radius: 50%;
+    padding: 2px;
+    color: #ffffff !important;
+}
+
+@media (max-width: 767px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none !important;
+  }
+}

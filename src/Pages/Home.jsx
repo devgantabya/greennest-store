@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import "swiper/css";
+import { Autoplay, EffectFade, Navigation, Pagination } from "swiper/modules";
 import { FaStar } from "react-icons/fa";
 import { Link } from "react-router";
 import PlantOfWeek from "../Component/Section/PlantOfWeek";
+import "swiper/css";
+import "swiper/css/effect-fade";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 const Home = () => {
   const [plants, setPlants] = useState([]);
@@ -39,24 +42,83 @@ const Home = () => {
 
   return (
     <div className="space-y-15 md:space-y-20">
-      <section className="relative h-[500px] mb-20">
+      <section className="relative w-full h-[550px]">
         <Swiper
-          modules={[Autoplay]}
-          spaceBetween={30}
-          slidesPerView={1}
-          autoplay={{ delay: 4000 }}
-          loop
+          modules={[Autoplay, EffectFade, Pagination, Navigation]}
+          effect="fade"
+          speed={1200}
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={true}
+          loop={true}
+          className="h-full w-full"
         >
           {plants.map((plant) => (
             <SwiperSlide key={plant.plantId}>
-              <div className="h-[500px] flex items-center justify-center bg-[#e9eae5] relative">
-                <img
-                  src={plant.image}
-                  alt={plant.plantName}
-                  className="h-full w-full object-contain rounded-lg shadow-lg"
-                />
-                <div className="absolute left-4 md:left-10 bottom-10 text-white text-3xl md:text-4xl font-bold shadow-lg p-2 bg-[#209d50] rounded mr-4 md:mr-0">
-                  {plant.plantName} - {plant.careLevel} Care!
+              <div className="relative h-full w-full">
+                <div
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${plant.decorImage})` }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent"></div>
+                </div>
+
+                <div className="relative h-full max-w-7xl mx-auto px-4 flex items-center">
+                  <div className="grid md:grid-cols-2 gap-5 items-center w-full">
+                    <div className="text-white space-y-6 animate-fade-in">
+                      <h1 className="text-5xl md:text-5xl lg:text-7xl font-bold leading-tight">
+                        {plant.plantName}
+                      </h1>
+
+                      <p className="text-lg sm:text-xl text-gray-200 leading-relaxed max-w-xl">
+                        {plant.description}
+                      </p>
+
+                      <div className="flex items-center gap-6 pt-4">
+                        <div className="flex items-center gap-2">
+                          <FaStar className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                          <span className="text-lg font-semibold">
+                            {plant.rating}
+                          </span>
+                        </div>
+                        <div className="h-6 w-px bg-white/30" />
+                        <div className="text-sm">
+                          <span className="text-gray-300">Care Level:</span>
+                          <span className="ml-2 font-semibold">
+                            {plant.careLevel}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-4 pt-8 border-t border-white/20">
+                        <img
+                          src={plant.expertImage}
+                          alt={plant.expertName}
+                          className="w-12 h-12 rounded-full border-2 border-white/30 object-cover"
+                        />
+                        <div>
+                          <p className="text-sm text-gray-300">Plant Expert</p>
+                          <p className="font-semibold">{plant.expertName}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="hidden lg:flex justify-center items-center">
+                      <div className="relative animate-float">
+                        <div className="absolute inset-0 bg-[#209d50]/20 blur-3xl rounded-full" />
+                        <img
+                          src={plant.image}
+                          alt={plant.plantName}
+                          className="relative w-full max-w-lg h-auto object-contain drop-shadow-2xl"
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </SwiperSlide>
