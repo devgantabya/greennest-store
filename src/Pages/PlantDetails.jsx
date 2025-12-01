@@ -1,24 +1,15 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Link, useNavigate, useParams } from "react-router";
-import { AuthContext } from "../contexts/AuthContext/AuthContext";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router";
 import { toast } from "react-toastify";
 import errorPlant from "../assets/404 plant.jpg";
 import { FaStar } from "react-icons/fa";
 
 const PlantDetails = () => {
   const { id } = useParams();
-  const { user } = useContext(AuthContext);
-  const navigate = useNavigate();
 
   const [plant, setPlant] = useState(null);
   const [loading, setLoading] = useState(true);
   const [form, setForm] = useState({ name: "", email: "" });
-
-  useEffect(() => {
-    if (!user) {
-      navigate(`/login?redirect=/plants/${id}`);
-    }
-  }, [user, navigate, id]);
 
   useEffect(() => {
     fetch("/plants.json")
