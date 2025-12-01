@@ -26,11 +26,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "plants/:id",
-        element: (
-          <PrivateRoute>
-            <PlantDetails></PlantDetails>
-          </PrivateRoute>
-        ),
+        Component: PlantDetails,
       },
       {
         path: "login",
