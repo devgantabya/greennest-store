@@ -9,6 +9,8 @@ import PrivateRoute from "./PrivateRoute.jsx";
 import PlantDetails from "../Pages/PlantDetails.jsx";
 import Profile from "../Pages/Profile.jsx";
 import NotFoundPage from "../Pages/NotFoundPage.jsx";
+import AboutUs from "../Pages/AboutUs.jsx";
+import Contact from "../Pages/Contact.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +29,14 @@ export const router = createBrowserRouter([
       {
         path: "plants/:id",
         Component: PlantDetails,
+      },
+      {
+        path: "about",
+        Component: AboutUs,
+      },
+      {
+        path: "contact",
+        Component: Contact,
       },
       {
         path: "login",

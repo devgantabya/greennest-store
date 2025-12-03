@@ -52,18 +52,21 @@ const Navbar = () => {
           Plants
         </NavLink>
       </li>
-      {user && (
-        <li onClick={() => setMenuOpen(false)}>
-          <NavLink to="/profile" className={navLinkClass}>
-            My Profile
-          </NavLink>
-        </li>
-      )}
+      <li onClick={() => setMenuOpen(false)}>
+        <NavLink to="/about" className={navLinkClass}>
+          About
+        </NavLink>
+      </li>
+      <li onClick={() => setMenuOpen(false)}>
+        <NavLink to="/contact" className={navLinkClass}>
+          Contact
+        </NavLink>
+      </li>
     </>
   );
 
   return (
-    <nav className="bg-white relative shadow-sm">
+    <nav className="bg-white shadow-sm sticky top-0 z-10">
       <div className="flex justify-between items-center py-2 pr-4 md:pr-0 container mx-auto relative z-50">
         <div className="flex items-center gap-4">
           <button
@@ -118,6 +121,11 @@ const Navbar = () => {
                 <ul className="menu menu-sm dropdown-content bg-base-100 rounded-box absolute right-0 mt-3 w-52 p-2 shadow z-50">
                   <li className="font-semibold text-gray-700 px-3 py-2 border-b">
                     {user.displayName || "User"}
+                  </li>
+                  <li onClick={() => setDropdownOpen(false)}>
+                    <NavLink to="/profile" className="font-semibold text-base">
+                      My Profile
+                    </NavLink>
                   </li>
                   <li>
                     <button

@@ -88,7 +88,7 @@ const PlantOfWeek = () => {
                 </div>
 
                 <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-gray-50 to-white rounded-xl border border-gray-100">
-                  <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center">
+                  <div className="shrink-0 w-12 h-12 flex items-center justify-center">
                     <span>
                       <GiWateringCan size={40} className="text-gray-600" />
                     </span>

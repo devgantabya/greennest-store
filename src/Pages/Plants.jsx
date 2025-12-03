@@ -26,11 +26,11 @@ const Plants = () => {
     );
 
   return (
-    <div className="container mx-auto px-4 pb-8 pt-0 md:pt-8">
+    <div className="">
       <title>GreenNest - Plants</title>
-      <section className="">
-        <div className="py-12 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">
+      <section className="px-4 container mx-auto py-10 md:py-16">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-snug tracking-tight">
             Our Plants
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -38,32 +38,37 @@ const Plants = () => {
             air.
           </p>
         </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {plants.map((plant) => (
             <div
               key={plant.plantId}
-              className="relative rounded-xl bg-green-100 shadow-lg hover:shadow-xl transition overflow-hidden"
+              className="rounded-xl bg-white shadow-md hover:shadow-2xl transition-transform transform hover:-translate-y-1 relative overflow-hidden"
             >
-              <img
-                src={plant.image}
-                alt={plant.plantName}
-                className="w-full h-60 object-contain rounded-t-xl p-2 bg-gray-100"
-              />
-              <div className="p-4">
-                <h3 className="text-2xl md:text-xl font-bold text-gray-900 mb-2">
+              <div className="overflow-hidden rounded-t-xl">
+                <img
+                  src={plant.image}
+                  alt={plant.plantName}
+                  className="w-full h-64 object-contain transition-transform duration-300 hover:scale-105"
+                />
+              </div>
+              <div className="p-5 flex flex-col gap-3">
+                <h3 className="text-xl font-bold text-gray-900">
                   {plant.plantName}
                 </h3>
-                <div className="flex justify-between items-center mb-3">
-                  <p className="text-2xl font-bold text-[#209d50]">
+
+                <div className="flex justify-between items-center">
+                  <p className="text-2xl font-bold text-green-600">
                     ${plant.price}
                   </p>
-                  <div className="flex items-center gap-1 bg-white px-3 py-1 rounded-2xl shadow absolute top-4 right-4 ">
+                  <div className="flex items-center gap-1 bg-white px-3 py-1 rounded-full shadow">
                     <FaStar className="text-yellow-400" />
                     <span className="font-semibold">{plant.rating}</span>
                   </div>
                 </div>
+
                 <Link to={`/plants/${plant.plantId}`}>
-                  <button className="cursor-pointer text-xl mt-3 px-4 font-semibold py-2 w-full bg-[#209d50] text-white rounded hover:bg-[#12863f]">
+                  <button className="mt-3 w-full bg-green-600 text-white font-semibold py-2 rounded-lg transition-colors hover:bg-green-700">
                     View Details
                   </button>
                 </Link>
