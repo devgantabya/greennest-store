@@ -11,11 +11,17 @@ import Profile from "../Pages/Profile.jsx";
 import NotFoundPage from "../Pages/NotFoundPage.jsx";
 import AboutUs from "../Pages/AboutUs.jsx";
 import Contact from "../Pages/Contact.jsx";
+import ScrollToTop from "../Component/ScrollToTop.jsx";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    Component: Root,
+    element: (
+      <>
+        <ScrollToTop />
+        <Root />
+      </>
+    ),
     errorElement: <NotFoundPage></NotFoundPage>,
     children: [
       {

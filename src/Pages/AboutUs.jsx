@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import aliceGreen from "../assets/Team-members/Alice Green.jpeg";
 import bobLeaf from "../assets/Team-members/Bob-leaf.png";
 import claraRoot from "../assets/Team-members/Clara-root.webp";
@@ -6,6 +6,21 @@ import davidStem from "../assets/Team-members/David-stem.jpg";
 import ourMission from "../assets/oyr-mission.webp";
 
 const AboutUs = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  }, []);
+
+  if (loading)
+    return (
+      <div className="text-center mt-20 h-screen flex justify-center items-center">
+        <span className="loading loading-spinner loading-xl text-success"></span>
+      </div>
+    );
+
   return (
     <section className="px-4 container mx-auto py-14 md:py-20">
       <div className="text-center max-w-3xl mx-auto mb-20">
@@ -75,7 +90,7 @@ const AboutUs = () => {
                 key={index}
                 className="bg-green-50 rounded-xl shadow-md p-6 text-center hover:shadow-xl transition-transform duration-300 hover:scale-105"
               >
-                <p className="text-gray-700 text-lg">{feature}</p>
+                <p className="text-gray-700 font-semibold text-lg">{feature}</p>
               </div>
             ))}
           </div>
