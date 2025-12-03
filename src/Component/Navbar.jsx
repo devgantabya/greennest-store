@@ -37,7 +37,7 @@ const Navbar = () => {
     `text-base font-medium hover:text-[#209d50] hover:bg-transparent transition ${
       isActive
         ? "text-[#209d50] relative after:absolute after:left-0 after:-bottom-0 after:w-full after:h-[2px] after:bg-[#209d50]"
-        : "text-black"
+        : "text-black dark:text-gray-200"
     }`;
 
   const links = (
@@ -66,17 +66,17 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="bg-white shadow-sm sticky top-0 z-10">
+    <nav className="bg-white dark:bg-gray-900 shadow-sm sticky top-0 z-10">
       <div className="flex justify-between items-center py-2 pr-4 md:pr-0 container mx-auto relative z-50">
         <div className="flex items-center gap-4">
           <button
-            className="lg:hidden btn bg-white border-0 shadow-none hover:bg-white"
+            className="lg:hidden btn bg-transparent border-0 shadow-none hover:bg-transparent"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle Menu"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-black"
+              className="h-6 w-6 text-black dark:text-white"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -106,7 +106,7 @@ const Navbar = () => {
                 onClick={() => setDropdownOpen(!dropdownOpen)}
                 className="btn btn-ghost btn-circle avatar"
               >
-                <div className="w-10 rounded-full bg-green-100 border border-green-400 overflow-hidden">
+                <div className="w-10 rounded-full bg-green-100 dark:bg-gray-700 border border-green-400 dark:border-gray-600 overflow-hidden">
                   <img
                     src={
                       user.photoURL ||
@@ -118,12 +118,15 @@ const Navbar = () => {
               </button>
 
               {dropdownOpen && (
-                <ul className="menu menu-sm dropdown-content bg-base-100 rounded-box absolute right-0 mt-3 w-52 p-2 shadow z-50">
-                  <li className="font-semibold text-gray-700 px-3 py-2 border-b">
+                <ul className="menu menu-sm dropdown-content bg-white dark:bg-gray-800 dark:text-white rounded-box absolute right-0 mt-3 w-52 p-2 shadow z-50">
+                  <li className="font-semibold text-gray-700 dark:text-gray-300 px-3 py-2 border-b dark:border-gray-700">
                     {user.displayName || "User"}
                   </li>
                   <li onClick={() => setDropdownOpen(false)}>
-                    <NavLink to="/profile" className="font-semibold text-base">
+                    <NavLink
+                      to="/profile"
+                      className="font-semibold text-base dark:hover:bg-gray-700"
+                    >
                       My Profile
                     </NavLink>
                   </li>
@@ -133,7 +136,7 @@ const Navbar = () => {
                         handleLogout();
                         setDropdownOpen(false);
                       }}
-                      className="text-red-600 w-full text-base text-left hover:bg-red-50 rounded-lg"
+                      className="text-red-600 dark:text-red-400 w-full text-base text-left hover:bg-red-50 dark:hover:bg-gray-700 rounded-lg"
                     >
                       Logout
                     </button>
@@ -145,13 +148,13 @@ const Navbar = () => {
             <div className="flex items-center gap-3">
               <Link
                 to="/login"
-                className="px-4 py-2 border border-[#209d50] text-[#209d50] rounded-lg font-medium hover:bg-[#209d50] hover:text-white transition"
+                className="px-4 py-2 border border-[#209d50] text-[#209d50] dark:text-[#40dd80] dark:border-[#40dd80] rounded-lg font-medium hover:bg-[#209d50] dark:hover:bg-[#40dd80] hover:text-white transition"
               >
                 Login
               </Link>
               <Link
                 to="/register"
-                className="px-4 py-2 bg-[#209d50] text-white rounded-lg font-medium hover:bg-[#157d3e] transition"
+                className="px-4 py-2 bg-[#209d50] text-white rounded-lg font-medium hover:bg-[#157d3e] dark:bg-[#40dd80] dark:hover:bg-[#28b15d] transition"
               >
                 Register
               </Link>
@@ -163,7 +166,7 @@ const Navbar = () => {
       {menuOpen && (
         <ul
           ref={menuRef}
-          className="menu menu-sm bg-white rounded-box p-2 shadow absolute top-full left-0 w-full lg:hidden z-40"
+          className="menu menu-sm bg-white dark:bg-gray-900 dark:text-gray-200 rounded-box p-2 shadow absolute top-full left-0 w-full lg:hidden z-40"
         >
           {links}
         </ul>

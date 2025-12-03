@@ -19,15 +19,15 @@ const PlantOfWeek = () => {
   return (
     <div className="w-full max-w-5xl mx-auto">
       <div className="mb-12 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-2 tracking-tight">
+        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-2 tracking-tight">
           Plant of the Week
         </h1>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-4">
+        <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-4">
           Discover our carefully selected botanical treasure
         </p>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:shadow-3xl">
+      <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:shadow-3xl">
         <div className="grid md:grid-cols-2 gap-0">
           <div className="h-96 md:h-auto overflow-hidden group">
             <img
@@ -39,65 +39,73 @@ const PlantOfWeek = () => {
 
           <div className="p-8 md:p-10 flex flex-col justify-center">
             <div className="mb-6">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
                 {plant.name}
               </h2>
-              <p className="text-lg text-gray-500 italic">
+              <p className="text-lg text-gray-500 dark:text-gray-400 italic">
                 {plant.scientificName}
               </p>
             </div>
 
-            <p className="text-gray-700 leading-relaxed mb-8 text-lg">
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-8 text-lg">
               {plant.description}
             </p>
 
             <div className="space-y-4">
-              <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+              <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                 Care Requirements
               </h3>
 
               <div className="grid grid-cols-1 gap-4">
-                <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-gray-50 to-white rounded-xl border border-gray-100">
+                <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 rounded-xl border border-gray-100 dark:border-gray-700">
                   <div className="flex-shrink-0 w-12 h-12  flex items-center justify-center">
                     <span>
                       <PiPlantThin size={40} className="text-green-500" />
                     </span>
                   </div>
                   <div className="flex-1">
-                    <p className="text-sm text-gray-600 font-medium">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">
                       Difficulty
                     </p>
-                    <p className="text-lg font-semibold text-gray-900">
+                    <p className="text-lg font-semibold text-gray-900 dark:text-white">
                       {plant.careLevel}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-gray-50 to-white rounded-xl border border-gray-100">
+                <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 rounded-xl border border-gray-100 dark:border-gray-700">
                   <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center">
                     <span>
-                      <CiLight size={40} className="text-yellow-700" />
+                      <CiLight
+                        size={40}
+                        className="text-yellow-700 dark:text-yellow-400"
+                      />
                     </span>
                   </div>
                   <div className="flex-1">
-                    <p className="text-sm text-gray-600 font-medium">Light</p>
-                    <p className="text-lg font-semibold text-gray-900">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+                      Light
+                    </p>
+                    <p className="text-lg font-semibold text-gray-900 dark:text-white">
                       {plant.lightRequirement}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-gray-50 to-white rounded-xl border border-gray-100">
+                <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 rounded-xl border border-gray-100 dark:border-gray-700">
                   <div className="shrink-0 w-12 h-12 flex items-center justify-center">
                     <span>
-                      <GiWateringCan size={40} className="text-gray-600" />
+                      <GiWateringCan
+                        size={40}
+                        className="text-gray-600 dark:text-gray-300"
+                      />
                     </span>
                   </div>
                   <div className="flex-1">
-                    <p className="text-sm text-gray-600 font-medium">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">
                       Watering
                     </p>
-                    <p className="text-lg font-semibold text-gray-900">
+                    <p className="text-lg font-semibold text-gray-900 dark:text-white">
                       {plant.waterFrequency}
                     </p>
                   </div>

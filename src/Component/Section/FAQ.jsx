@@ -43,10 +43,10 @@ const FAQ = () => {
   return (
     <div>
       <div className="mb-10 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">
+        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 tracking-tight">
           Frequently Asked Questions
         </h1>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-4">
+        <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-4">
           Quick answers to the most common plant and order-related questions.
         </p>
       </div>
@@ -55,18 +55,22 @@ const FAQ = () => {
         {faqs.map((faq, index) => (
           <div
             key={index}
-            className="bg-white border border-[#dce8d8] rounded-lg shadow-sm"
+            className="bg-white dark:bg-gray-900 border border-[#dce8d8] dark:border-gray-700 rounded-lg shadow-sm"
           >
             <button
               onClick={() => toggleFAQ(index)}
-              className="w-full flex justify-between items-center px-6 py-4 text-left font-semibold text-gray-800 hover:bg-gray-50 transition"
+              className="w-full flex justify-between items-center px-6 py-4 text-left font-semibold text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 transition"
             >
               {faq.question}
-              <span className="text-xl">{openIndex === index ? "−" : "+"}</span>
+              <span className="text-xl dark:text-gray-300">
+                {openIndex === index ? "−" : "+"}
+              </span>
             </button>
 
             {openIndex === index && (
-              <div className="px-6 pb-4 text-gray-600">{faq.answer}</div>
+              <div className="px-6 pb-4 text-gray-600 dark:text-gray-400">
+                {faq.answer}
+              </div>
             )}
           </div>
         ))}

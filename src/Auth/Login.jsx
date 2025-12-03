@@ -25,7 +25,6 @@ const Login = () => {
         form.reset();
         navigate(location.state || "/");
       })
-
       .catch((error) => {
         console.error("Login error:", error.code, error.message);
         setMessage(error.message);
@@ -54,89 +53,85 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-base-200 py-10 md:min-h-screen">
+    <div className="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors py-10 flex justify-center items-center">
       <title>GreenNest - Login</title>
-      <div className="hero-content flex-col">
-        <div className="text-center">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">Welcome back!</h1>
+
+      <div className="w-full md:w-[360px]">
+        <div className="text-center mb-6">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
+            Welcome back!
+          </h1>
         </div>
 
-        <div className="card bg-base-100 w-full md:w-[320px] shrink-0 shadow-2xl">
+        <div className="card bg-white dark:bg-gray-800 w-full shadow-2xl rounded-lg">
           <div className="card-body">
-            <form onSubmit={handleLogIn}>
-              <fieldset className="fieldset space-y-3">
+            <form onSubmit={handleLogIn} className="space-y-4">
+              <input
+                type="email"
+                name="email"
+                className="w-full border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+
+              <div className="relative">
                 <input
-                  type="email"
-                  name="email"
-                  className="input"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  className="w-full border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition pr-12"
+                  placeholder="Password"
+                  required
                 />
-
-                <div className="relative">
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    name="password"
-                    className="input w-full pr-12"
-                    placeholder="Password"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-3 text-gray-500 text-sm"
-                  >
-                    {showPassword ? (
-                      <span>
-                        <FaEyeSlash />
-                      </span>
-                    ) : (
-                      <span>
-                        <FaRegEye />
-                      </span>
-                    )}
-                  </button>
-                </div>
-
-                <div className="text-right -mt-2">
-                  <button
-                    type="button"
-                    onClick={handleForgotPassword}
-                    className="text-sm text-green-500 hover:underline"
-                  >
-                    Forgot password?
-                  </button>
-                </div>
-
-                <button className="btn btn-neutral bg-green-600 hover:bg-green-700 text-lg font-semibold border-0 w-full">
-                  Sign In
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-3 text-gray-500 dark:text-gray-300"
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaRegEye />}
                 </button>
-              </fieldset>
+              </div>
+
+              <div className="text-right">
+                <button
+                  type="button"
+                  onClick={handleForgotPassword}
+                  className="text-sm text-green-500 hover:underline"
+                >
+                  Forgot password?
+                </button>
+              </div>
+
+              <button
+                type="submit"
+                className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition"
+              >
+                Sign In
+              </button>
             </form>
 
             {message && (
-              <p className="text-center text-sm mt-3 text-green-600">
+              <p className="text-center text-sm mt-3 text-green-500">
                 {message}
               </p>
             )}
 
-            <div className="text-center mt-3 text-sm">
-              <p>
-                Don't have an account?{" "}
-                <NavLink
-                  to="/register"
-                  className="text-green-500 font-medium hover:underline"
-                >
-                  Sign Up
-                </NavLink>
-              </p>
+            <div className="text-center mt-3 text-sm text-gray-700 dark:text-gray-300">
+              Don't have an account?{" "}
+              <NavLink
+                to="/register"
+                className="text-green-500 font-medium hover:underline"
+              >
+                Sign Up
+              </NavLink>
             </div>
 
-            <div className="divider">OR</div>
+            <div className="divider text-gray-400 dark:text-gray-500">OR</div>
 
             <button
               onClick={handleGoogleSignIn}
-              className="btn w-full bg-white text-black border-[#e5e5e5] hover:bg-gray-100 flex items-center justify-center gap-2"
+              className="btn w-full bg-white dark:bg-gray-700 text-black dark:text-white border border-gray-200 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 flex items-center justify-center gap-2 transition"
             >
               <svg
                 aria-label="Google logo"

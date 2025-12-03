@@ -76,118 +76,89 @@ const Register = () => {
   };
 
   return (
-    <div className="bg-base-200 py-10 md:min-h-screen">
+    <div className="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors py-10 flex justify-center items-center">
       <title>GreenNest - Register</title>
-      <div className="hero-content flex-col">
-        <div className="text-center lg:text-left">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">
+
+      <div className="w-full md:w-[360px]">
+        <div className="text-center mb-6">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
             Please Register!
           </h1>
         </div>
 
-        <div className="card bg-base-100 w-full md:w-[300px] shrink-0 shadow-2xl">
+        <div className="card bg-white dark:bg-gray-800 w-full shadow-2xl rounded-lg">
           <div className="card-body">
-            <form onSubmit={handleRegister}>
-              <fieldset className="fieldset space-y-3">
+            <form onSubmit={handleRegister} className="space-y-4">
+              <input
+                type="text"
+                name="name"
+                value={inputValue.name}
+                onChange={handleChange}
+                placeholder="Name"
+                className="w-full border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                value={inputValue.email}
+                onChange={handleChange}
+                placeholder="Email"
+                className="w-full border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+                required
+              />
+              <input
+                type="text"
+                name="photoURL"
+                value={inputValue.photoURL}
+                onChange={handleChange}
+                placeholder="Photo URL"
+                className="w-full border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+              />
+              <div className="relative">
                 <input
-                  type="text"
-                  name="name"
-                  value={inputValue.name}
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  value={inputValue.password}
                   onChange={handleChange}
-                  className="input"
-                  placeholder="Name"
+                  placeholder="Password"
+                  className="w-full border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition pr-12"
                   required
                 />
-                <input
-                  type="email"
-                  name="email"
-                  value={inputValue.email}
-                  onChange={handleChange}
-                  className="input"
-                  placeholder="Email"
-                  required
-                />
-                <input
-                  type="text"
-                  name="photoURL"
-                  value={inputValue.photoURL}
-                  onChange={handleChange}
-                  className="input"
-                  placeholder="Photo URL"
-                />
-                <div className="relative">
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    name="password"
-                    value={inputValue.password}
-                    onChange={handleChange}
-                    className="input w-full pr-12"
-                    placeholder="Password"
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-3 text-gray-500 text-sm"
-                  >
-                    {showPassword ? <FaEyeSlash /> : <FaRegEye />}
-                  </button>
-                </div>
                 <button
-                  className="btn btn-neutral bg-green-600 hover:bg-green-700 text-lg font-semibold border-0 w-full"
-                  disabled={loading}
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-3 text-gray-500 dark:text-gray-300"
                 >
-                  {loading ? "Registering..." : "Sign Up"}
+                  {showPassword ? <FaEyeSlash /> : <FaRegEye />}
                 </button>
-              </fieldset>
+              </div>
+
+              <button
+                className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition"
+                disabled={loading}
+              >
+                {loading ? "Registering..." : "Sign Up"}
+              </button>
             </form>
 
-            <div className="text-center mt-3 text-sm">
-              <p>
-                Already have an account?{" "}
-                <NavLink
-                  to="/login"
-                  className="text-green-500 font-medium hover:underline"
-                >
-                  Log In
-                </NavLink>
-              </p>
+            <div className="text-center mt-3 text-sm text-gray-700 dark:text-gray-300">
+              Already have an account?{" "}
+              <NavLink
+                to="/login"
+                className="text-green-500 font-medium hover:underline"
+              >
+                Log In
+              </NavLink>
             </div>
 
-            <div className="divider">OR</div>
+            <div className="divider text-gray-400 dark:text-gray-500">OR</div>
 
             <button
               onClick={handleGoogleSignIn}
               disabled={loading}
-              className="btn w-full bg-white text-black border-[#e5e5e5] hover:bg-gray-100 flex items-center justify-center gap-2"
+              className="btn w-full bg-white dark:bg-gray-700 text-black dark:text-white border border-gray-200 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 flex items-center justify-center gap-2 transition"
             >
-              <svg
-                aria-label="Google logo"
-                width="18"
-                height="18"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 512 512"
-              >
-                <g>
-                  <path d="m0 0H512V512H0" fill="#fff" />
-                  <path
-                    fill="#34a853"
-                    d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"
-                  />
-                  <path
-                    fill="#4285f4"
-                    d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"
-                  />
-                  <path
-                    fill="#fbbc02"
-                    d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"
-                  />
-                  <path
-                    fill="#ea4335"
-                    d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"
-                  />
-                </g>
-              </svg>
               {loading ? "Processing..." : "Sign Up with Google"}
             </button>
           </div>

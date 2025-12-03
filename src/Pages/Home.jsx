@@ -31,7 +31,7 @@ const Home = () => {
 
   if (loading)
     return (
-      <div className="text-center mt-20 h-screen flex justify-center items-center">
+      <div className="text-center mt-20 h-screen flex justify-center items-center dark:bg-gray-900 dark:text-white">
         <span className="loading loading-spinner loading-xl text-success"></span>
       </div>
     );
@@ -42,7 +42,7 @@ const Home = () => {
   );
 
   return (
-    <div className="space-y-15 md:space-y-20">
+    <div className="space-y-15 md:space-y-20 dark:bg-gray-900">
       <section className="relative w-full h-[500px]">
         <Swiper
           modules={[Autoplay, EffectFade, Pagination, Navigation]}
@@ -71,12 +71,12 @@ const Home = () => {
 
                 <div className="relative h-full container mx-auto px-4 flex items-center">
                   <div className="grid md:grid-cols-2 gap-5 items-center w-full">
-                    <div className="text-white space-y-6 animate-fade-in">
+                    <div className="text-white dark:text-gray-200 space-y-6 animate-fade-in">
                       <h1 className="text-5xl md:text-5xl lg:text-7xl font-bold leading-tight">
                         {plant.plantName}
                       </h1>
 
-                      <p className="text-lg sm:text-xl text-gray-200 leading-relaxed max-w-xl">
+                      <p className="text-lg sm:text-xl text-gray-200 dark:text-gray-300 leading-relaxed max-w-xl">
                         {plant.description}
                       </p>
 
@@ -89,7 +89,9 @@ const Home = () => {
                         </div>
                         <div className="h-6 w-px bg-white/30" />
                         <div className="text-sm">
-                          <span className="text-gray-300">Care Level:</span>
+                          <span className="text-gray-300 dark:text-gray-400">
+                            Care Level:
+                          </span>
                           <span className="ml-2 font-semibold">
                             {plant.careLevel}
                           </span>
@@ -103,7 +105,9 @@ const Home = () => {
                           className="w-12 h-12 rounded-full border-2 border-white/30 object-cover"
                         />
                         <div>
-                          <p className="text-sm text-gray-300">Plant Expert</p>
+                          <p className="text-sm text-gray-300 dark:text-gray-400">
+                            Plant Expert
+                          </p>
                           <p className="font-semibold">{plant.expertName}</p>
                         </div>
                       </div>
@@ -129,10 +133,10 @@ const Home = () => {
 
       <section className="px-4 container mx-auto py-10 md:py-16">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-snug tracking-tight">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 leading-snug tracking-tight">
             Top Rated Indoor Plants
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Bring life to your space with our carefully curated collection of
             premium indoor plants.
           </p>
@@ -142,7 +146,7 @@ const Home = () => {
           {plants.slice(0, 4).map((plant) => (
             <div
               key={plant.plantId}
-              className="rounded-xl bg-white shadow-md hover:shadow-2xl transition-transform transform hover:-translate-y-1 relative overflow-hidden"
+              className="rounded-xl bg-white dark:bg-gray-800 shadow-md hover:shadow-2xl transition-transform transform hover:-translate-y-1 relative overflow-hidden"
             >
               <div className="overflow-hidden rounded-t-xl">
                 <img
@@ -152,7 +156,7 @@ const Home = () => {
                 />
               </div>
               <div className="p-5 flex flex-col gap-3">
-                <h3 className="text-xl font-bold text-gray-900">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white">
                   {plant.plantName}
                 </h3>
 
@@ -160,7 +164,7 @@ const Home = () => {
                   <p className="text-2xl font-bold text-green-600">
                     ${plant.price}
                   </p>
-                  <div className="flex items-center gap-1 bg-white px-3 py-1 rounded-full shadow">
+                  <div className="flex items-center gap-1 bg-white dark:bg-gray-700 px-3 py-1 rounded-full shadow">
                     <FaStar className="text-yellow-400" />
                     <span className="font-semibold">{plant.rating}</span>
                   </div>
@@ -177,52 +181,48 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="bg-green-50 py-10 md:py-16">
+      <section className="bg-green-50 dark:bg-gray-800 py-10 md:py-16">
         <div className="px-4 container mx-auto">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 tracking-tight">
               Plant Care Tips
             </h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-4">
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-4">
               Easy plant care tips to help your indoor plants stay fresh,
               healthy, and full of life. Perfect for both beginners and plant
               lovers.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-6 bg-white rounded-lg shadow">
-              <h3 className="text-xl font-semibold mb-2">Water Wisely</h3>
-              <p>
-                Check the soil before watering; most plants prefer their soil to
-                dry slightly between waterings. Avoid over watering to prevent
-                root rot.
-              </p>
-            </div>
-            <div className="p-6 bg-white rounded-lg shadow">
-              <h3 className="text-xl font-semibold mb-2">Give Proper Light</h3>
-              <p>
-                Place your plants according to their light needs: bright
-                sunlight for sun-loving plants, indirect light for low-light
-                species. Rotate them occasionally for even growth.
-              </p>
-            </div>
-            <div className="p-6 bg-white rounded-lg shadow">
-              <h3 className="text-xl font-semibold mb-2">Prune and Clean</h3>
-              <p>
-                Remove dead or yellowing leaves and wipe dust off foliage. This
-                keeps plants healthy and helps them grow stronger.
-              </p>
-            </div>
+            {["Water Wisely", "Give Proper Light", "Prune and Clean"].map(
+              (tip, i) => (
+                <div
+                  key={i}
+                  className="p-6 bg-white dark:bg-gray-700 rounded-lg shadow"
+                >
+                  <h3 className="text-xl font-semibold mb-2 dark:text-white">
+                    {tip}
+                  </h3>
+                  <p className="dark:text-gray-300">
+                    {tip === "Water Wisely"
+                      ? "Check the soil before watering; most plants prefer their soil to dry slightly between waterings. Avoid over watering to prevent root rot."
+                      : tip === "Give Proper Light"
+                      ? "Place your plants according to their light needs: bright sunlight for sun-loving plants, indirect light for low-light species. Rotate them occasionally for even growth."
+                      : "Remove dead or yellowing leaves and wipe dust off foliage. This keeps plants healthy and helps them grow stronger."}
+                  </p>
+                </div>
+              )
+            )}
           </div>
         </div>
       </section>
 
       <section className="px-4 container mx-auto py-10 md:py-16">
         <div className="text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 tracking-tight">
             Meet Our Green Experts
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Meet the plant specialists who bring knowledge, care, and
             inspiration to every corner of your indoor garden.
           </p>
@@ -235,7 +235,7 @@ const Home = () => {
                 alt={expert.expertName}
                 className="w-full h-full object-contain"
               />
-              <h3 className="text-2xl md:text-xl font-semibold">
+              <h3 className="text-2xl md:text-xl font-semibold dark:text-white">
                 {expert.expertName}
               </h3>
               <p className="text-[#209d50] text-xl font-medium md:text-base">
@@ -246,12 +246,12 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="px-4 md:px-10 bg-green-50 py-10 md:py-16">
+      <section className="px-4 md:px-10 bg-green-50 dark:bg-gray-800 py-10 md:py-16">
         <div className="text-center mb-10">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 tracking-tight">
             Eco Decor Ideas
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-4">
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-4">
             Eco-decor with plants uses natural or recycled materials, like woven
             baskets or up cycled containers, arranging plants on shelves,
             hanging terrariums, or tabletops to add life and texture to your
@@ -262,14 +262,14 @@ const Home = () => {
           {plants.slice(0, 8).map((plant) => (
             <div
               key={plant.plantId}
-              className="rounded-lg overflow-hidden shadow-lg"
+              className="rounded-lg overflow-hidden shadow-lg dark:shadow-gray-700"
             >
               <img
                 src={plant.decorImage}
                 alt={plant.plantName}
                 className="w-full h-50 object-cover"
               />
-              <div className="text-xl p-2 font-bold bg-green-50 text-center uppercase">
+              <div className="text-xl p-2 font-bold bg-green-50 dark:bg-gray-700 text-center uppercase dark:text-white">
                 {plant.plantName}
               </div>
             </div>
@@ -280,7 +280,8 @@ const Home = () => {
       <section className="px-4 md:px-10 py-10 md:py-16">
         <PlantOfWeek></PlantOfWeek>
       </section>
-      <section className="px-4 md:px-10 bg-green-50 py-10 md:py-16">
+
+      <section className="px-4 md:px-10 bg-green-50 dark:bg-gray-800 py-10 md:py-16">
         <FAQ></FAQ>
       </section>
     </div>

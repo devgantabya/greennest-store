@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import { toast } from "react-toastify";
-import errorPlant from "../assets/404 plant.jpg";
+import errorPlant from "../assets/404-not-found-plant.png";
 import { FaStar } from "react-icons/fa";
 
 const PlantDetails = () => {
@@ -34,18 +34,18 @@ const PlantDetails = () => {
 
   if (loading)
     return (
-      <div className="text-center mt-20 h-screen flex justify-center items-center">
+      <div className="text-center mt-20 h-screen flex justify-center items-center dark:bg-gray-900">
         <span className="loading loading-spinner loading-xl text-success"></span>
       </div>
     );
 
   if (!plant)
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
         <title>GreenNest - Plant Not Found</title>
         <div className="text-center">
           <img className="w-80 mx-auto mb-6" src={errorPlant} alt="" />
-          <h1 className="text-[#001931] font-semibold text-4xl mb-4">
+          <h1 className="text-[#001931] dark:text-white font-semibold text-4xl mb-4">
             Oops! Plant not found.
           </h1>
           <Link
@@ -59,27 +59,27 @@ const PlantDetails = () => {
     );
 
   return (
-    <div className="container mx-auto my-10 md:my-12 px-4 md:px-0">
+    <div className="bg-gray-50 dark:bg-gray-900 transition-colors py-10">
       <title>{`GreenNest - ${plant.plantName}`}</title>
 
-      <section className="flex flex-col md:flex-row gap-8 md:gap-10 bg-white md:pt-8 pb-8">
-        <div className="w-full md:w-1/2 relative bg-gray-100 rounded-xl">
+      <section className="container mx-auto px-4 flex flex-col md:flex-row gap-8 md:gap-10 md:pt-8 pb-8 rounded-xl shadow transition-colors">
+        <div className="w-full md:w-1/2 relative bg-gray-100 dark:bg-gray-700 rounded-xl">
           <img
             src={plant.image}
             alt={plant.plantName}
-            className="w-full h-auto rounded-xl object-cover  p-4"
+            className="w-full h-auto rounded-xl object-cover p-4"
           />
-          <div className="absolute top-4 left-4 bg-green-100 text-green-800 text-sm font-semibold px-3 py-1 rounded-full">
+          <div className="absolute top-4 left-4 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-sm font-semibold px-3 py-1 rounded-full">
             {plant.category}
           </div>
         </div>
 
         <div className="w-full md:w-1/2 flex flex-col justify-between">
           <div>
-            <h1 className="text-4xl font-bold text-gray-800 mb-2">
+            <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-2">
               {plant.plantName}
             </h1>
-            <p className="text-gray-500 italic text-sm mb-4">
+            <p className="text-gray-500 dark:text-gray-300 italic text-sm mb-4">
               by {plant.providerName}
             </p>
 
@@ -87,7 +87,7 @@ const PlantDetails = () => {
               ${plant.price}
             </p>
 
-            <div className="flex items-center gap-6 text-gray-700 mb-4">
+            <div className="flex items-center gap-6 text-gray-700 dark:text-gray-300 mb-4">
               <p>
                 <span className="font-semibold">Care Level:</span>{" "}
                 {plant.careLevel}
@@ -97,18 +97,18 @@ const PlantDetails = () => {
               </p>
             </div>
 
-            <p className="text-gray-700 mb-2">
+            <p className="text-gray-700 dark:text-gray-300 mb-2">
               <span className="font-semibold">Available Stock:</span>{" "}
               {plant.availableStock}
             </p>
 
-            <p className="text-gray-600 leading-relaxed mb-5">
+            <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-5">
               {plant.description}
             </p>
           </div>
 
-          <div className="border-t border-gray-300 pt-6">
-            <h3 className="text-2xl font-semibold mb-5 text-gray-800">
+          <div className="border-t border-gray-300 dark:border-gray-600 pt-6">
+            <h3 className="text-2xl font-semibold mb-5 text-gray-800 dark:text-white">
               Book a Consultation
             </h3>
             <form onSubmit={handleSubmit} className="space-y-5">
@@ -118,9 +118,8 @@ const PlantDetails = () => {
                   name="name"
                   value={form.name}
                   onChange={handleChange}
-                  id="name"
                   placeholder="Your Name"
-                  className="w-full border border-gray-300 rounded-lg  px-4 py-3  text-gray-900 placeholder-gray-400  focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition"
+                  className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition"
                   required
                 />
               </div>
@@ -131,9 +130,8 @@ const PlantDetails = () => {
                   name="email"
                   value={form.email}
                   onChange={handleChange}
-                  id="email"
                   placeholder="Your Email"
-                  className="w-full border border-gray-300 rounded-lg  px-4 py-3  text-gray-900 placeholder-gray-400  focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition"
+                  className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition"
                   required
                 />
               </div>
@@ -149,8 +147,8 @@ const PlantDetails = () => {
         </div>
       </section>
 
-      <section className="border-t border-gray-400">
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-5 md:mt-10 tracking-tight">
+      <section className="container mx-auto px-4 border-t border-gray-400 dark:border-gray-700 mt-10">
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-5 md:mt-10 tracking-tight">
           Decor Idea
         </h1>
         <img
